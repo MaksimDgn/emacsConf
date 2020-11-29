@@ -1,5 +1,30 @@
-;; info emacs25.2.2
+;; -*- lexical-binding: t-*-
+;;; initialization
 
+;; added by package.el.  this must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+;; нумерацыя строк слева
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+;; (load-theme 'leuven)
+
+
+
+(menu-bar-mode -1) 
+(tool-bar-mode -1) 
+
+(scroll-bar-mode -1) 
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
+;; (package-initialize)
 
 (require 'linum)
 (setq linum-format "%d ")
@@ -14,25 +39,50 @@
 
 (set-default 'cursor-type 'hbar)
 (column-number-mode)
-
+(fset 'yes-or-no-p 'y-or-n-p)
 (ido-mode)
 
 (setq column-number-mode 1) ;; Номера строк слева
+;; (require 'init)
+
+
 (require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
-
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("elpa" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
+;; (require 'auto-complete)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+;;(ac-source-yasnippet)
 
+;;(require 'yasnippet)
+(add-to-list 'load-path
+                "~/path-to-yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;;  _________________________ Mike Zamansky _________________________
+;; Using Emacs - Intro to Org Mode
+;; (use-package org-bullets
+;; :ensure t
+;; :config
+;; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;;
+;; https://youtu.be/49kBWM3RQQ8?list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package try
+	     :ensure t)
+
+(use-package which-key
+	     :ensure t
+	     :config (which-key-mode))
 
 
-(defalias 'list-buffers 'ibuffer)
-(org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
+
 
 ;; it looks like counsel is a requirement for swiper
 (use-package counsel
@@ -63,12 +113,40 @@
 	       (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
 	       ))
 
-;; auto-complete
-;; (use-package auto-complete
-;;   :ensure t
-;;   :init
-;;   (progn
-;;     (ac-config-default)
-;;     (global-auto-complete-mode t)
-;;     ))
 
+;; Using Emacs - Lesson 4 - Buffers
+;; (setq indo-enable-flex-matching t)
+;; (setq ido-everywhere t)
+;; (ido-mode 1)
+
+(defalias 'list-buffers 'ibuffer)
+(org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
+
+;; Using Emacs 7 - Navigating with Avy - https://youtu.be/ziytRbASKeU
+(use-package avy
+  :ensure t
+  :bind ("M-s" . avy-goto-char))
+
+;; auto-complete
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)
+    ))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (avy jedi flycheck color-theme yasnippet-snippets which-key use-package try org-plus-contrib org-bullets org lorem-ipsum counsel auto-complete))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

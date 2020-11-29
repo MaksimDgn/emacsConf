@@ -1,36 +1,28 @@
-
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "<f5>") 'revert-buffer)
-
-(use-package try
-             :ensure t)
 
 (use-package org-bullets
 :ensure t
 :config
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-(use-package which-key
-           :ensure t
-           :config (which-key-mode))
+(use-package color-theme-modern
+:ensure t)
 
-(use-package auto-complete
+(use-package zenburn-theme
 :ensure t
-:init
-(progn
-  (ac-config-default)
-  (global-auto-complete-mode t)
-  ))
+:config (load-theme 'zenburn t))
+
+(load-theme 'leuven t)
 
 (use-package flycheck
   :ensure t
   :init
   (global-flycheck-mode t))
 
-;; (counsel :repo "abo-abo/swiper"
-;;         :fetcher github
-;;         :files ("counsel.el"))
-
-
+(use-package jedi
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (add-hook 'Python-mode-hook 'jedi:ac-setup))

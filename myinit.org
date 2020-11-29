@@ -1,18 +1,12 @@
-#+STARTIP: everview
-;; info emacs25.2.2
+#+STARTUP: everview
+
 * interface tweaks
-#+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "<f5>") 'revert-buffer)
 #+END_SRC
 
-* try
-#+BEGIN_SRC emacs-lisp
-(use-package try
-	     :ensure t)
-#+END_SRC
 * Stuff org mode
   #+BEGIN_SRC emacs-lisp
 (use-package org-bullets
@@ -20,26 +14,17 @@
 :config
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
-* which key
-  Brings up some help
+* Themes
   #+BEGIN_SRC emacs-lisp
-  (use-package which-key
-	     :ensure t
-	     :config (which-key-mode))
-  #+END_SRC
+    (use-package color-theme-modern
+    :ensure t)
 
-* auto-complete
-  #+BEGIN_SRC emacs-lisp
-  (use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
+    (use-package zenburn-theme
+    :ensure t
+    :config (load-theme 'zenburn t))
+
+    (load-theme 'leuven t)
   #+END_SRC
-* Company - ?
-;; [[https://youtu.be/srFQwTvbaxY?list%3DPL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg&t%3D754][Using Emacs 45 - Company or Autocomplete]]
 * Flycheck 
   #+BEGIN_SRC emacs-lisp
     (use-package flycheck
@@ -47,22 +32,12 @@
       :init
       (global-flycheck-mode t))
   #+END_SRC
-# * Python
-#   #+BEGIN_SRC emacs-lisp
-#     (use-package jedi
-#       :ensure t
-#       :init
-#       (add-hook 'python-mode-hook 'jedi:setup)
-#       (add-hook 'Python-mode-hook 'jedi:ac-setup))
-
-  #   #+END_SRC
-* swiperp
+* Python
   #+BEGIN_SRC emacs-lisp
-;; (counsel :repo "abo-abo/swiper"
-;;         :fetcher github
-;;         :files ("counsel.el"))
-  #+END_SRC
-* the rest
-  #+BEGIN_SRC emacs-lisp
+    (use-package jedi
+      :ensure t
+      :init
+      (add-hook 'python-mode-hook 'jedi:setup)
+      (add-hook 'Python-mode-hook 'jedi:ac-setup))
 
   #+END_SRC
