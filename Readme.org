@@ -1,0 +1,10 @@
+#+STARTUP: showall hidestars
+* Using Emacs 2 - org
+  Show some org-mode
+  - reviw init.el
+  - set up Readme.org
+  - [[https://youtu.be/x5KiYDd9s8k][Lesson 2 org]] open linc: C-c C-o
+* Links
+  - [[http://cestlaz.github.io][Here's my Blog]]
+* Emacs Doom
+  - [[https://www.youtube.com/watch?v=rCMh7srOqvw][Episode 1]]
